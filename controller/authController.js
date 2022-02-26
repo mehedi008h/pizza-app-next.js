@@ -2,7 +2,7 @@ import User from '../models/user';
 import cloudinary from 'cloudinary';
 
 import ErrorHandler from '../utils/errorHandler';
-import catchAsyncErrors from '../middlewares/catchAsyncErrors';
+import catchAsyncErrors from '../middleware/catchAsyncErrors';
 import absoluteUrl from 'next-absolute-url';
 import crypto from 'crypto';
 

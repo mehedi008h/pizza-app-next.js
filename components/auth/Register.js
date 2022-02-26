@@ -1,9 +1,17 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, registerUser } from '../../redux/actions/userActions';
 
 import styles from '../../styles/Register.module.css';
 
 const Register = () => {
+    const dispatch = useDispatch()
+    const router = useRouter();
+
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -15,6 +23,22 @@ const Register = () => {
     const [avatar, setAvatar] = useState('');
     const [avatarPreview, setAvatarPreview] = useState('https://res.cloudinary.com/mehedi08h/image/upload/v1645853942/pizza/logo_tkouyy.jpg');
 
+    const { success, error, loading } = useSelector(state => state.auth);
+
+    useEffect(() => {
+
+        if (success) {
+            toast.success("Register Successfully.");
+            // router.push('/login')
+        }
+
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors())
+        }
+
+    }, [dispatch, success, error, router])
+
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -22,7 +46,7 @@ const Register = () => {
             name, email, password, avatar
         }
 
-        console.log("User", userData);
+        dispatch(registerUser(userData))
 
     }
 

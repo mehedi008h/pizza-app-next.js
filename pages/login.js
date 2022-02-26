@@ -1,12 +1,12 @@
-import Register from '../components/auth/Register';
+import Login from '../components/auth/Login';
 import Layout from '../components/layout/Layout';
 
 import { getSession } from 'next-auth/react';
 
-export default function RegisterPage() {
+export default function LoginPage() {
     return (
-        <Layout title='Register - Pizza App' >
-            <Register />
+        <Layout title='Login - Pizza App' >
+            <Login />
         </Layout>
     )
 }
@@ -14,7 +14,6 @@ export default function RegisterPage() {
 export async function getServerSideProps(context) {
 
     const session = await getSession({ req: context.req })
-
     if (session) {
         return {
             redirect: {
