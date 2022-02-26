@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { AiOutlineAlignRight } from 'react-icons/ai';
-import { MdOutlineRestaurantMenu } from 'react-icons/md';
+import { BiEdit, BiLogOutCircle, BiUserCircle } from 'react-icons/bi';
+import { MdFavoriteBorder, MdOutlineArrowDropDownCircle, MdOutlineRestaurantMenu } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from '../../styles/Header.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadUser } from '../../redux/actions/userActions';
+import { signOut } from 'next-auth/react';
+import { Spinner } from 'react-bootstrap';
 
 const Header = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
+    const [dropdown, setDropdown] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const { user, loading } = useSelector(state => state.loadedUser);
+
+    useEffect(() => {
+        if (!user) {
+            dispatch(loadUser())
+        }
+    }, [dispatch, user])
+
+
+    const logoutHandler = () => {
+        signOut();
+    }
     return (
         <nav className={styles.app__navbar}>
             <div className="container d-flex align-items-center justify-content-between">
@@ -18,8 +38,50 @@ const Header = () => {
                 <div className={styles.app__navbar_login}>
                     <Link href="/" passHref><a className={styles.p__opensans}>Home</a></Link>
                     <Link href="/about" passHref><a className={styles.p__opensans}>About</a></Link>
-                    <div />
-                    <Link href="/" passHref><a className={styles.p__opensans}>RESUME</a></Link>
+                    <div className={styles.divied} />
+                    {loading ?
+                        (
+                            <Spinner as="span" animation="border" variant="info" role="status" aria-hidden="true" />
+                        ) : (
+                            <>
+                                {
+                                    user ? (
+                                        <>
+                                            <Image src={user.avatar && user.avatar.url} alt={user && user.name} className="rounded-circle" height={"50px"} width={"50px"} />
+                                            <button className={styles.dropdown_btn} onClick={() => setDropdown(true)}>{user && user.name} <MdOutlineArrowDropDownCircle size={20} /></button>
+                                            {
+                                                dropdown && (
+                                                    <div class={styles.dropdown_content}>
+
+                                                        {user.role === 'user' && (
+                                                            <>
+                                                                <Link href="/me/profile" passHref>
+                                                                    <a onClick={() => setDropdown(false)} className={styles.dropdown_item}><BiUserCircle className='me-2 mb-1' size={20} /> Profile</a>
+                                                                </Link>
+                                                            </>
+                                                        )}
+                                                        {user.role === 'admin' && (
+                                                            <>
+                                                                <Link href="/me/profile" passHref>
+                                                                    <a onClick={() => setDropdown(false)} className={styles.dropdown_item}><MdFavoriteBorder className='me-2 mb-1' size={20} /> My Order</a>
+                                                                </Link>
+                                                            </>
+                                                        )}
+                                                        <Link href="/" passHref><a onClick={logoutHandler} className={styles.dropdown_item}><BiLogOutCircle className='me-2 mb-1' size={20} /> Logout</a></Link>
+                                                    </div>
+                                                )
+                                            }
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Link href="/login" passHref><a className={styles.p__opensans}>Login</a></Link>
+                                        </>
+                                    )
+                                }
+                            </>
+                        )
+                    }
+
                 </div>
                 <div className={styles.app__navbar_smallscreen}>
                     <GiHamburgerMenu color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
