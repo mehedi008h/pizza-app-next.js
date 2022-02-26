@@ -13,7 +13,7 @@ const Header = () => {
         <nav className={styles.app__navbar}>
             <div className="container d-flex align-items-center justify-content-between">
                 <div className={styles.app__navbar_logo}>
-                    <Image height={50} width={50} src="https://res.cloudinary.com/mehedi08h/image/upload/v1645027084/protflio/logo_vucikv.png" alt="app__logo" />
+                    <Image height={50} width={50} src="https://res.cloudinary.com/mehedi08h/image/upload/v1645853942/pizza/logo_tkouyy.jpg" alt="app__logo" />
                 </div>
                 <div className={styles.app__navbar_login}>
                     <Link href="/" passHref><a className={styles.p__opensans}>Home</a></Link>
