@@ -1,6 +1,6 @@
 import React from 'react';
+import Drawer from '../../../components/layout/Drawer';
 import Layout from '../../../components/layout/Layout';
-import Drawer from '../../../components/user/Drawer';
 import MyOrder from '../../../components/user/MyOrder';
 import Profile from '../../../components/user/Profile';
 

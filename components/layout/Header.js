@@ -62,8 +62,8 @@ const Header = () => {
                                                         )}
                                                         {user.role === 'admin' && (
                                                             <>
-                                                                <Link href="/me/profile" passHref>
-                                                                    <a onClick={() => setDropdown(false)} className={styles.dropdown_item}><MdFavoriteBorder className='me-2 mb-1' size={20} /> My Order</a>
+                                                                <Link href="/admin" passHref>
+                                                                    <a onClick={() => setDropdown(false)} className={styles.dropdown_item}><MdFavoriteBorder className='me-2 mb-1' size={20} /> Dashboard</a>
                                                                 </Link>
                                                             </>
                                                         )}

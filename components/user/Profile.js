@@ -6,7 +6,6 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 
 import styles from '../../styles/Profile.module.css';
-import Drawer from './Drawer';
 
 const Profile = () => {
     const { user, loading } = useSelector(state => state.loadedUser);

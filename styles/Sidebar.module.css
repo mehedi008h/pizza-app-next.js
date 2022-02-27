@@ -1,0 +1,21 @@
+.sidebar {
+    min-height: 90vh;
+    background-color: antiquewhite;
+
+    display: flex;
+}
+.link_items {
+    display: flex;
+    flex-direction: column;
+}
+
+.link_items a {
+    text-decoration: none;
+    color: white;
+    margin-top: 10px;
+    padding: 10px 25px;
+    background-image: linear-gradient(to right top, #d4386d, #d5326a, #d72a66, #d82163, #d9165f);
+    border-radius: 5px;
+    font-weight: 700;
+
+}

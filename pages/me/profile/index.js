@@ -3,8 +3,8 @@ import { getSession } from 'next-auth/react'
 
 import Layout from '../../../components/layout/Layout';
 import Profile from '../../../components/user/Profile';
-import Drawer from '../../../components/user/Drawer';
 import MyOrder from '../../../components/user/MyOrder';
+import Drawer from '../../../components/layout/Drawer';
 
 const profile = () => {
     return (
