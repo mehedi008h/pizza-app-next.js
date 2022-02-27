@@ -1,4 +1,7 @@
 import React from 'react';
+import User from '../../models/user';
+import { getSession } from 'next-auth/react';
+
 import AddPizza from '../../components/admin/AddPizza';
 import Sidebar from '../../components/admin/Sidebar';
 import Drawer from '../../components/layout/Drawer';
@@ -20,5 +23,27 @@ const addpizza = () => {
         </Layout>
     );
 };
+
+// check admin 
+
+export async function getServerSideProps(context) {
+
+    const session = await getSession({ req: context.req })
+
+    let user = await User.findById(session.id);
+    if (!session || user.role !== 'admin') {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: {}
+    }
+
+}
 
 export default addpizza;

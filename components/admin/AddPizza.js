@@ -1,17 +1,28 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, newPizza } from '../../redux/actions/pizzaActions';
+import { NEW_PIZZA_RESET } from '../../redux/constants/pizzaConstants';
 
 import styles from '../../styles/AddPizza.module.css';
 
 const AddPizza = () => {
-    const [title, setTitle] = useState(null);
-    const [description, setDescription] = useState(null);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [prices, setPrices] = useState([]);
     const [extraOptions, setExtraOptions] = useState([]);
-    const [extra, setExtra] = useState(null);
+    const [extra, setExtra] = useState('');
 
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const { loading, error, success } = useSelector(state => state.newPizza)
 
     const changePrice = (e, index) => {
         const currentPrices = prices;
@@ -27,10 +38,24 @@ const AddPizza = () => {
         setExtraOptions((prev) => [...prev, extra]);
     };
 
-    const submitHandler = (e) => {
-        e.preventDefault()
+    useEffect(() => {
 
-        const productData = {
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors())
+        }
+
+        if (success) {
+            toast.success("Pizza added successfully.")
+            router.push('/admin')
+            dispatch({ type: NEW_PIZZA_RESET })
+        }
+
+    }, [dispatch, error, success, router])
+
+    const handleCreate = () => {
+
+        const pizzaData = {
             title,
             description,
             prices,
@@ -39,11 +64,11 @@ const AddPizza = () => {
             images
         }
 
-        console.log("Data", productData);
+        console.log("Data", pizzaData);
 
-        // if (images.length === 0) return toast.error('Please upload images.')
+        if (images.length === 0) return toast.error('Please upload images.')
 
-        // dispatch(newRoom(roomData))
+        dispatch(newPizza(pizzaData))
 
     }
 
@@ -77,145 +102,145 @@ const AddPizza = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 col-offset-md-6 mx-auto">
-                        <form className='mt-3' onSubmit={submitHandler} encType="multipart/form-data" >
-                            <div className={styles.form_group}>
-                                <label htmlFor="title_field">Title</label>
-                                <input
-                                    type="text"
-                                    className={styles.form_control}
-                                    name='title'
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    required
-                                />
-                            </div>
 
-                            {/*start price section  */}
+                        <div className={styles.form_group}>
+                            <label htmlFor="title_field">Title</label>
+                            <input
+                                type="text"
+                                className={styles.form_control}
+                                name='title'
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                required
+                            />
+                        </div>
 
-                            <div className={styles.form_group}>
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <label htmlFor="price_field">Price for small</label>
-                                        <input
-                                            type="number"
-                                            className={styles.form_control}
-                                            name='price'
-                                            onChange={(e) => changePrice(e, 0)}
-                                        />
-                                    </div>
-                                    <div className="col-md-4">
-                                        <label htmlFor="price_field">Price for mediam</label>
-                                        <input
-                                            type="number"
-                                            className={styles.form_control}
-                                            name='price'
-                                            onChange={(e) => changePrice(e, 1)}
-                                        />
-                                    </div>
-                                    <div className="col-md-4">
-                                        <label htmlFor="price_field">Price for large</label>
-                                        <input
-                                            type="number"
-                                            className={styles.form_control}
-                                            name='price'
-                                            onChange={(e) => changePrice(e, 2)}
-                                        />
-                                    </div>
+                        {/*start price section  */}
+
+                        <div className={styles.form_group}>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <label htmlFor="price_field">Price for small</label>
+                                    <input
+                                        type="number"
+                                        className={styles.form_control}
+                                        name='price'
+                                        onChange={(e) => changePrice(e, 0)}
+                                    />
                                 </div>
-
-                            </div>
-
-                            {/*start description section  */}
-
-                            <div className={styles.form_group}>
-                                <label htmlFor="password_field">Description</label>
-                                <textarea
-                                    className={styles.textarea}
-                                    placeholder="Your Message"
-                                    name="description"
-                                    onChange={(e) => setDescription(e.target.value)}
-                                    required
-                                />
-                            </div>
-
-                            {/*start extras section  */}
-
-                            <div className={styles.form_group}>
-                                <div className="row">
-                                    <div className="col-md-7">
-                                        <label htmlFor="password_field">Add Extras Name</label>
-                                        <input
-                                            type="text"
-                                            className={styles.form_control}
-                                            placeholder="Enter Item name .."
-                                            name="text"
-                                            onChange={handleExtraInput}
-
-                                        />
-                                    </div>
-                                    <div className="col-md-3">
-                                        <label htmlFor="password_field">Add Extras price</label>
-                                        <input
-                                            type="number"
-                                            className={styles.form_control}
-                                            placeholder="Enter Item Price .."
-                                            name="price"
-                                            onChange={handleExtraInput}
-
-                                        />
-                                    </div>
-                                    <div className="col-md-2 d-flex align-items-center mt-3">
-                                        <div className=''>
-                                            <button onClick={handleExtra} className='btn btn-info'>Add</button>
-                                        </div>
-                                    </div>
+                                <div className="col-md-4">
+                                    <label htmlFor="price_field">Price for mediam</label>
+                                    <input
+                                        type="number"
+                                        className={styles.form_control}
+                                        name='price'
+                                        onChange={(e) => changePrice(e, 1)}
+                                    />
+                                </div>
+                                <div className="col-md-4">
+                                    <label htmlFor="price_field">Price for large</label>
+                                    <input
+                                        type="number"
+                                        className={styles.form_control}
+                                        name='price'
+                                        onChange={(e) => changePrice(e, 2)}
+                                    />
                                 </div>
                             </div>
 
-                            {/*show extras section  */}
+                        </div>
 
-                            <div className={styles.form_group}>
-                                <label htmlFor="password_field">Extras Item</label>
-                                <div className={styles.extraItems}>
-                                    {extraOptions.map((option) => (
-                                        <span key={option.text} className={styles.extraItem}>
-                                            {option.text}
-                                        </span>
-                                    ))}
+                        {/*start description section  */}
+
+                        <div className={styles.form_group}>
+                            <label htmlFor="password_field">Description</label>
+                            <textarea
+                                className={styles.textarea}
+                                placeholder="Your Message"
+                                name="description"
+                                onChange={(e) => setDescription(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        {/*start extras section  */}
+
+                        <div className={styles.form_group}>
+                            <div className="row">
+                                <div className="col-md-7">
+                                    <label htmlFor="password_field">Add Extras Name</label>
+                                    <input
+                                        type="text"
+                                        className={styles.form_control}
+                                        placeholder="Enter Item name .."
+                                        name="text"
+                                        onChange={handleExtraInput}
+
+                                    />
+                                </div>
+                                <div className="col-md-3">
+                                    <label htmlFor="password_field">Add Extras price</label>
+                                    <input
+                                        type="number"
+                                        className={styles.form_control}
+                                        placeholder="Enter Item Price .."
+                                        name="price"
+                                        onChange={handleExtraInput}
+
+                                    />
+                                </div>
+                                <div className="col-md-2 d-flex align-items-center mt-3">
+                                    <div className=''>
+                                        <button onClick={handleExtra} className='btn btn-info'>Add</button>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            {/*start avatar section  */}
+                        {/*show extras section  */}
 
-                            <div className={styles.form_group}>
-                                <label htmlFor='avatar_upload'>Avatar</label>
-                                <input
-                                    type='file'
-                                    name='images'
-                                    className={styles.file_control}
-                                    id='customFile'
-                                    accept='images/*'
-                                    onChange={onChange}
-                                    multiple
-
-                                />
-                                <div className='d-flex align-items-center'>
-                                    {imagesPreview.map(img => (
-                                        <Image
-                                            src={img}
-                                            key={img}
-                                            alt="Images Preview"
-                                            className="mt-3 mr-2"
-                                            width="55"
-                                            height="55"
-                                        />
-                                    ))}
-                                </div>
+                        <div className={styles.form_group}>
+                            <label htmlFor="password_field">Extras Item</label>
+                            <div className={styles.extraItems}>
+                                {extraOptions.map((option) => (
+                                    <span key={option.text} className={styles.extraItem}>
+                                        {option.text}
+                                    </span>
+                                ))}
                             </div>
-                            <div className='mt-3 text-center'>
-                                <button className={styles.btn}>Add Pizza</button>
+                        </div>
+
+                        {/*start avatar section  */}
+
+                        <div className={styles.form_group}>
+                            <label htmlFor='avatar_upload'>Avatar</label>
+                            <input
+                                type='file'
+                                name='images'
+                                className={styles.file_control}
+                                id='customFile'
+                                accept='images/*'
+                                onChange={onChange}
+                                multiple
+
+                            />
+                            <div className='d-flex align-items-center'>
+                                {imagesPreview.map(img => (
+                                    <Image
+                                        src={img}
+                                        key={img}
+                                        alt="Images Preview"
+                                        className="mt-3 mr-2"
+                                        width="55"
+                                        height="55"
+                                    />
+                                ))}
                             </div>
-                        </form>
+                        </div>
+                        <div className='mt-3 text-center'>
+                            <button onClick={handleCreate} className={styles.btn}>{loading ? <Spinner animation="border" /> : 'CREATE'}</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
