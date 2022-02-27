@@ -210,7 +210,7 @@ const AddPizza = () => {
                             </div>
                         </div>
 
-                        {/*start avatar section  */}
+                        {/*start image section  */}
 
                         <div className={styles.form_group}>
                             <label htmlFor='avatar_upload'>Avatar</label>

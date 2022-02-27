@@ -20,7 +20,7 @@ const Sidebar = () => {
                     ) : (
                         <>
                             <div className='text-center mt-4'>
-                                <Image src={user.avatar && user.avatar.url} alt={user && user.name} className="rounded-circle" height={"120px"} width={"120px"} />
+                                <Image src={user?.avatar && user?.avatar.url} alt={user && user?.name} className="rounded-circle" height={"120px"} width={"120px"} />
                                 <h5>{user?.name}</h5>
                             </div>
                         </>
