@@ -5,7 +5,7 @@ import ErrorHandler from "../utils/errorHandler";
 import catchAsyncErrors from '../middleware/catchAsyncErrors';
 
 
-// Create new room   =>   /api/rooms
+// Create new room, Admin   =>   /api/rooms
 const newPizza = catchAsyncErrors(async (req, res) => {
 
     const images = req.body.images;
@@ -36,6 +36,19 @@ const newPizza = catchAsyncErrors(async (req, res) => {
     })
 })
 
+// Get all pizza - ADMIN   =>   /api/admin/rooms
+const allAdminPizza = catchAsyncErrors(async (req, res) => {
+
+    const pizza = await Pizza.find();
+
+    res.status(200).json({
+        success: true,
+        pizza
+    })
+
+})
+
 export {
     newPizza,
+    allAdminPizza
 }

@@ -1,13 +1,13 @@
-import { getSession } from 'next-auth/react';
 import React from 'react';
+import User from '../../models/user';
+import { getSession } from 'next-auth/react';
 
-import Dashboard from '../../components/admin/Dashboard';
 import Sidebar from '../../components/admin/Sidebar';
 import Drawer from '../../components/layout/Drawer';
 import Layout from '../../components/layout/Layout';
-import User from '../../models/user';
+import AllPizza from '../../components/admin/AllPizza';
 
-const index = () => {
+const allPizza = () => {
     return (
         <Layout title='Admin - Pizza App'>
             <div className="row g-3">
@@ -16,7 +16,7 @@ const index = () => {
                 </div>
                 <div className="col-md-10">
                     <Drawer>
-                        <Dashboard />
+                        <AllPizza />
                     </Drawer>
                 </div>
             </div>
@@ -46,4 +46,4 @@ export async function getServerSideProps(context) {
 
 }
 
-export default index;
+export default allPizza;

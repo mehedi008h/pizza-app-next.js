@@ -32,7 +32,7 @@ const Sidebar = () => {
                     <Link href="/admin" passHref>
                         <a><MdFavoriteBorder className='me-3' size={25} /> Dashboard</a>
                     </Link>
-                    <Link href="/admin/addpizza" passHref>
+                    <Link href="/admin/allPizza" passHref>
                         <a><MdFavoriteBorder className='me-3' size={25} /> All Pizza</a>
                     </Link>
                     <Link href="/admin/addpizza" passHref>
