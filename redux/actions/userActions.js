@@ -7,28 +7,28 @@ import {
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
-    // UPDATE_PROFILE_REQUEST,
-    // UPDATE_PROFILE_SUCCESS,
-    // UPDATE_PROFILE_FAIL,
-    // FORGOT_PASSWORD_REQUEST,
-    // FORGOT_PASSWORD_SUCCESS,
-    // FORGOT_PASSWORD_FAIL,
-    // RESET_PASSWORD_REQUEST,
-    // RESET_PASSWORD_SUCCESS,
-    // RESET_PASSWORD_FAIL,
-    // ADMIN_USERS_REQUEST,
-    // ADMIN_USERS_SUCCESS,
-    // ADMIN_USERS_FAIL,
-    // USER_DETAILS_REQUEST,
-    // USER_DETAILS_SUCCESS,
-    // USER_DETAILS_FAIL,
-    // UPDATE_USER_REQUEST,
-    // UPDATE_USER_SUCCESS,
-    // UPDATE_USER_FAIL,
-    // DELETE_USER_REQUEST,
-    // DELETE_USER_SUCCESS,
-    // DELETE_USER_RESET,
-    // DELETE_USER_FAIL,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAIL,
+    FORGOT_PASSWORD_REQUEST,
+    FORGOT_PASSWORD_SUCCESS,
+    FORGOT_PASSWORD_FAIL,
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAIL,
+    ADMIN_USERS_REQUEST,
+    ADMIN_USERS_SUCCESS,
+    ADMIN_USERS_FAIL,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL,
+    UPDATE_USER_REQUEST,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAIL,
+    DELETE_USER_REQUEST,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_RESET,
+    DELETE_USER_FAIL,
 
     CLEAR_ERRORS
 
@@ -77,6 +77,34 @@ export const loadUser = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+// Update Profile
+export const updateProfile = (userData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_PROFILE_REQUEST });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put('/api/me/update', userData, config)
+
+        dispatch({
+            type: UPDATE_PROFILE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+
+        dispatch({
+            type: UPDATE_PROFILE_FAIL,
             payload: error.response.data.message
         })
     }

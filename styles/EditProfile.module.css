@@ -1,0 +1,38 @@
+.spinner {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit_profile {
+    background-color: var(--color-crimson);
+    padding: 2rem;
+    border-radius: 10px;
+}
+.form_group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+.form_control {
+    height: 35px;
+    border-radius: 15px;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+.avatar_img {
+    border-radius: 50%;
+}
+.file_control {
+ margin-left: 15px;
+ border: none !important;
+}
+.btn {
+    background-color: brown;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+}

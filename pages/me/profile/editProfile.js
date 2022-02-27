@@ -1,20 +1,20 @@
 import React from 'react';
 import Layout from '../../../components/layout/Layout';
 import Drawer from '../../../components/user/Drawer';
-import MyOrder from '../../../components/user/MyOrder';
+import EditProfile from '../../../components/user/EditProfile';
 import Profile from '../../../components/user/Profile';
 
-const myorder = () => {
+const editProfile = () => {
     return (
-        <Layout title='My Order - Pizza App'>
+        <Layout title='Edit Profile - Pizza App'>
             <div className="container mt-3">
-                <div className="row">
+                <div className="row g-3">
                     <div className="col-md-3">
                         <Profile />
                     </div>
                     <div className="col-md-9">
                         <Drawer>
-                            <MyOrder />
+                            <EditProfile />
                         </Drawer>
                     </div>
                 </div>
@@ -24,4 +24,4 @@ const myorder = () => {
     );
 };
 
-export default myorder;
+export default editProfile;
