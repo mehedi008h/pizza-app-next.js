@@ -14,7 +14,7 @@ const Banner = () => {
                     </div>
                     <div className="col-md-6 text-center">
                         <div>
-                            <Image src="https://res.cloudinary.com/mehedi08h/image/upload/v1645853942/pizza/logo_tkouyy.jpg" height={300} width={300} />
+                            <Image src="https://res.cloudinary.com/mehedi08h/image/upload/v1645853942/pizza/logo_tkouyy.jpg" height={300} width={300} alt="banner" />
                         </div>
                     </div>
                 </div>

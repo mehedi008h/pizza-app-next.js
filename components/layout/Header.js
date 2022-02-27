@@ -51,7 +51,7 @@ const Header = () => {
                                             <button className={styles.dropdown_btn} onClick={() => setDropdown(true)}>{user && user.name} <MdOutlineArrowDropDownCircle size={20} /></button>
                                             {
                                                 dropdown && (
-                                                    <div class={styles.dropdown_content}>
+                                                    <div className={styles.dropdown_content}>
 
                                                         {user.role === 'user' && (
                                                             <>

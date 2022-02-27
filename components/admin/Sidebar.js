@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { Spinner } from 'react-bootstrap';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 
@@ -11,10 +12,21 @@ const Sidebar = () => {
     return (
         <div className={styles.sidebar}>
             <div className="container">
-                <div className='text-center mt-4'>
-                    <Image src={user.avatar && user.avatar.url} alt={user && user.name} className="rounded-circle" height={"120px"} width={"120px"} />
-                    <h5>{user?.name}</h5>
-                </div>
+                {
+                    loading ? (
+                        <>
+                            <Spinner />
+                        </>
+                    ) : (
+                        <>
+                            <div className='text-center mt-4'>
+                                <Image src={user.avatar && user.avatar.url} alt={user && user.name} className="rounded-circle" height={"120px"} width={"120px"} />
+                                <h5>{user?.name}</h5>
+                            </div>
+                        </>
+                    )
+                }
+
                 <hr />
                 <div className={styles.link_items}>
                     <Link href="/admin" passHref>

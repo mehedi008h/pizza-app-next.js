@@ -76,4 +76,4 @@ const productSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.models.Room || mongoose.model('Room', productSchema);
+module.exports = mongoose.models.Pizza || mongoose.model('Pizza', productSchema);

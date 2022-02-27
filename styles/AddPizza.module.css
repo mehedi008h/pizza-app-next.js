@@ -54,3 +54,20 @@
     border-radius: 20px;
     font-weight: 500;
 }
+
+.extraItems {
+    margin: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .extraItem {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid tomato;
+    background-color: white;
+    color: tomato;
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
