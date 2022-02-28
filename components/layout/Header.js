@@ -37,7 +37,7 @@ const Header = () => {
                 </div>
                 <div className={styles.app__navbar_login}>
                     <Link href="/" passHref><a className={styles.p__opensans}>Home</a></Link>
-                    <Link href="/about" passHref><a className={styles.p__opensans}>About</a></Link>
+                    <Link href="/pizza" passHref><a className={styles.p__opensans}>Pizza</a></Link>
                     <div className={styles.divied} />
                     {loading ?
                         (

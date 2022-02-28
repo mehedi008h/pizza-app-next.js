@@ -5,6 +5,17 @@ import ErrorHandler from "../utils/errorHandler";
 import catchAsyncErrors from '../middleware/catchAsyncErrors';
 
 
+// Get all pizza - USER   =>   /api/admin/rooms
+const allPizza = catchAsyncErrors(async (req, res) => {
+
+    const pizza = await Pizza.find();
+    res.status(200).json({
+        success: true,
+        pizza
+    })
+
+})
+
 // Create new room, Admin   =>   /api/rooms
 const newPizza = catchAsyncErrors(async (req, res) => {
 
@@ -136,6 +147,7 @@ const deletePizza = catchAsyncErrors(async (req, res, next) => {
 })
 
 export {
+    allPizza,
     newPizza,
     allAdminPizza,
     getSinglePizza,

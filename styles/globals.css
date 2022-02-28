@@ -23,6 +23,12 @@ a {
   color: unset;
   text-decoration: none;
 }
+.spinner {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .slide-bottom {
   -webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;

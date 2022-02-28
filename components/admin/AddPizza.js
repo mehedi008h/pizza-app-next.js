@@ -47,7 +47,7 @@ const AddPizza = () => {
 
         if (success) {
             toast.success("Pizza added successfully.")
-            router.push('/admin/allPizza')
+            router.push('/admin/pizzas')
             dispatch({ type: NEW_PIZZA_RESET })
         }
 

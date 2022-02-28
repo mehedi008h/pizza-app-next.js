@@ -2,6 +2,9 @@ import axios from 'axios';
 import absoluteUrl from 'next-absolute-url';
 
 import {
+    ALL_PIZZA_REQUEST,
+    ALL_PIZZA_SUCCESS,
+    ALL_PIZZA_FAIL,
     NEW_PIZZA_REQUEST,
     NEW_PIZZA_SUCCESS,
     NEW_PIZZA_FAIL,
@@ -20,6 +23,29 @@ import {
     CLEAR_ERRORS
 
 } from '../constants/pizzaConstants';
+
+// Get all pizza - ADMIN
+export const getAllPizza = () => async (dispatch) => {
+    try {
+
+        dispatch({ type: ALL_PIZZA_REQUEST })
+
+        const { data } = await axios.get(`/api/pizza`)
+        dispatch({
+            type: ALL_PIZZA_SUCCESS,
+            payload: data.pizza
+        })
+
+    } catch (error) {
+
+        console.log(error);
+
+        dispatch({
+            type: ALL_PIZZA_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 // new pizza
 export const newPizza = (pizzaData) => async (dispatch) => {

@@ -1,4 +1,7 @@
 import {
+    ALL_PIZZA_REQUEST,
+    ALL_PIZZA_SUCCESS,
+    ALL_PIZZA_FAIL,
     NEW_PIZZA_REQUEST,
     NEW_PIZZA_SUCCESS,
     NEW_PIZZA_RESET,
@@ -20,6 +23,37 @@ import {
     CLEAR_ERRORS
 
 } from '../constants/pizzaConstants';
+
+export const allPizzaReducer = (state = { pizzas: [] }, action) => {
+    switch (action.type) {
+
+        case ALL_PIZZA_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ALL_PIZZA_SUCCESS:
+            return {
+                loading: false,
+                pizzas: action.payload
+            }
+
+        case ALL_PIZZA_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
 
 export const newPizzaReducer = (state = { pizza: {} }, action) => {
     switch (action.type) {
@@ -56,6 +90,8 @@ export const newPizzaReducer = (state = { pizza: {} }, action) => {
             return state
     }
 }
+
+// get all pizza - ADMIN
 
 export const adminPizzaReducer = (state = { pizzas: [] }, action) => {
     switch (action.type) {
