@@ -17,7 +17,7 @@ module.exports = {
 
     // STRIPE_SECRET_KEY: 'sk_test_51KN85iIdr2NcIiWH0Qr2fWHKcb7yBP9M1N6tCJat1d57Xi2OLvs0WwTESxPZamcUeVxf6DB3XtTlaItmqurv87Px00MTvnXZ3k',
     // STRIPE_API_KEY: 'pk_test_51KN85iIdr2NcIiWHKR9b6xuQX7E2gWa2TjyfOnusxouxuSfZynEsFHkC5JaHIIRVzjwOey68JexeEh5ge8CfMl1d00G4PHnGdk',
-    // NEXTAUTH_URL: 'https://bookit-red.vercel.app/',
+    NEXTAUTH_URL: 'https://pizza-app-eta.vercel.app/',
   },
   images: {
     domains: ['res.cloudinary.com'],

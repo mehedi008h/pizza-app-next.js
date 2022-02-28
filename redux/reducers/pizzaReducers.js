@@ -6,6 +6,14 @@ import {
     ADMIN_PIZZA_REQUEST,
     ADMIN_PIZZA_SUCCESS,
     ADMIN_PIZZA_FAIL,
+    UPDATE_PIZZA_REQUEST,
+    UPDATE_PIZZA_SUCCESS,
+    UPDATE_PIZZA_RESET,
+    UPDATE_PIZZA_FAIL,
+    DELETE_PIZZA_REQUEST,
+    DELETE_PIZZA_SUCCESS,
+    DELETE_PIZZA_RESET,
+    DELETE_PIZZA_FAIL,
 
     CLEAR_ERRORS
 
@@ -62,6 +70,55 @@ export const adminPizzaReducer = (state = { pizzas: [] }, action) => {
             }
 
         case ADMIN_PIZZA_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+export const pizzaReducer = (state = {}, action) => {
+    switch (action.type) {
+        case UPDATE_PIZZA_REQUEST:
+        case DELETE_PIZZA_REQUEST:
+            return {
+                loading: true
+            }
+
+        case UPDATE_PIZZA_SUCCESS:
+            return {
+                loading: false,
+                isUpdated: action.payload
+            }
+
+        case DELETE_PIZZA_SUCCESS:
+            return {
+                loading: false,
+                isDeleted: action.payload
+            }
+
+        case UPDATE_PIZZA_RESET:
+            return {
+                isUpdated: false
+            }
+
+        case DELETE_PIZZA_RESET:
+            return {
+                loading: false,
+                isDeleted: false
+            }
+
+        case UPDATE_PIZZA_FAIL:
+        case DELETE_PIZZA_FAIL:
             return {
                 loading: false,
                 error: action.payload

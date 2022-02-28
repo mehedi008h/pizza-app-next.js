@@ -2,6 +2,8 @@ import React from 'react';
 import User from '../../models/user';
 import { getSession } from 'next-auth/react';
 
+import { getAdminPizza } from '../../redux/actions/pizzaActions';
+import { wrapper } from '../../redux/store';
 import Sidebar from '../../components/admin/Sidebar';
 import Drawer from '../../components/layout/Drawer';
 import Layout from '../../components/layout/Layout';
@@ -25,6 +27,27 @@ const allPizza = () => {
 };
 
 // check admin 
+
+// export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+//     const session = await getSession({ req })
+
+//     let user = await User.findById(session.id);
+//     if (!session || user.role !== 'admin') {
+//         return {
+//             redirect: {
+//                 destination: '/login',
+//                 permanent: false
+//             }
+//         }
+//     }
+
+//     return {
+//         props: {}
+//     }
+
+//     await store.dispatch(getAdminPizza(req.headers.cookie, req))
+
+// })
 
 export async function getServerSideProps(context) {
 

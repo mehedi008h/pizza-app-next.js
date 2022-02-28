@@ -8,6 +8,14 @@ import {
     ADMIN_PIZZA_REQUEST,
     ADMIN_PIZZA_SUCCESS,
     ADMIN_PIZZA_FAIL,
+    UPDATE_PIZZA_REQUEST,
+    UPDATE_PIZZA_SUCCESS,
+    UPDATE_PIZZA_RESET,
+    UPDATE_PIZZA_FAIL,
+    DELETE_PIZZA_REQUEST,
+    DELETE_PIZZA_SUCCESS,
+    DELETE_PIZZA_RESET,
+    DELETE_PIZZA_FAIL,
 
     CLEAR_ERRORS
 
@@ -59,6 +67,53 @@ export const getAdminPizza = () => async (dispatch) => {
 
         dispatch({
             type: ADMIN_PIZZA_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const updatePizza = (id, pizzaData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_PIZZA_REQUEST })
+
+        const config = {
+            header: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put(`/api/pizza/${id}`, pizzaData, config)
+
+        dispatch({
+            type: UPDATE_PIZZA_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_PIZZA_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
+export const deletePizza = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_PIZZA_REQUEST })
+
+        const { data } = await axios.delete(`/api/pizza/${id}`)
+
+        dispatch({
+            type: DELETE_PIZZA_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_PIZZA_FAIL,
             payload: error.response.data.message
         })
     }

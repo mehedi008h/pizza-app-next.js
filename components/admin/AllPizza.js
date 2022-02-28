@@ -4,15 +4,16 @@ import React, { useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getAdminPizza } from '../../redux/actions/pizzaActions';
+import { clearErrors, deletePizza, getAdminPizza } from '../../redux/actions/pizzaActions';
 import { MDBDataTable } from 'mdbreact';
+import { DELETE_PIZZA_RESET } from '../../redux/constants/pizzaConstants';
 
 const AllPizza = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
     const { loading, error, pizzas } = useSelector(state => state.adminPizza);
-    // const { error: deleteError, isDeleted } = useSelector(state => state.room)
+    const { error: deleteError, isDeleted } = useSelector(state => state.pizza);
 
     useEffect(() => {
 
@@ -23,17 +24,18 @@ const AllPizza = () => {
             dispatch(clearErrors())
         }
 
-        // if (deleteError) {
-        //     toast.erroe(deleteError);
-        //     dispatch(clearErrors())
-        // }
+        if (deleteError) {
+            toast.error(deleteError);
+            dispatch(clearErrors())
+        }
 
-        // if (isDeleted) {
-        //     router.push('/admin/rooms')
-        //     dispatch({ type: DELETE_ROOM_RESET })
-        // }
+        if (isDeleted) {
+            toast.success("Pizza Deleted Successfuly.");
+            router.push('/admin/allPizza');
+            dispatch({ type: DELETE_PIZZA_RESET })
+        }
 
-    }, [dispatch, error, router])
+    }, [dispatch, deleteError, isDeleted, error, router])
 
 
     const setPizzas = () => {
@@ -67,12 +69,12 @@ const AllPizza = () => {
                     <>
                         <Link href={`/admin/pizza/${pizza._id}`}>
                             <a className="btn btn-primary">
-                                <i className="fa fa-pencil"></i>
+                                Edit
                             </a>
                         </Link>
 
-                        <button className="btn btn-danger mx-2">
-                            <i className="fa fa-trash"></i>
+                        <button onClick={() => deletePizzaHandler(pizza._id)} className="btn btn-danger mx-2">
+                            Delete
                         </button>
 
                     </>
@@ -81,6 +83,10 @@ const AllPizza = () => {
 
         return data;
 
+    }
+
+    const deletePizzaHandler = (id) => {
+        dispatch(deletePizza(id))
     }
     return (
         <div className='container container-fluid'>
@@ -91,7 +97,7 @@ const AllPizza = () => {
 
                     <MDBDataTable
                         data={setPizzas()}
-                        className='px-3'
+                        className='p-3'
                         bordered
                         striped
                         hover

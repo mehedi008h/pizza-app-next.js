@@ -48,7 +48,81 @@ const allAdminPizza = catchAsyncErrors(async (req, res) => {
 
 })
 
+// Update pizza details   =>   /api/pizza/:id
+const updatePizza = catchAsyncErrors(async (req, res, next) => {
+
+    let pizza = await Pizza.findById(req.query.id);
+
+    if (!pizza) {
+        return next(new ErrorHandler('Pizza not found with this ID', 404))
+    }
+
+    if (req.body.images) {
+
+        // Delete images associated with the room
+        for (let i = 0; i < pizza.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(pizza.images[i].public_id)
+        }
+
+        let imagesLinks = []
+        const images = req.body.images;
+
+        for (let i = 0; i < images.length; i++) {
+
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder: 'pizza/pizza',
+            });
+
+            imagesLinks.push({
+                public_id: result.public_id,
+                url: result.secure_url
+            })
+
+        }
+
+        req.body.images = imagesLinks;
+
+    }
+
+    room = await Pizza.findByIdAndUpdate(req.query.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        pizza
+    })
+
+})
+
+// Delete pizza   =>   /api/pizza/:id
+const deletePizza = catchAsyncErrors(async (req, res, next) => {
+
+    const pizza = await Pizza.findById(req.query.id);
+
+    if (!pizza) {
+        return next(new ErrorHandler('Pizza not found with this ID', 404))
+    }
+
+    // Delete images associated with the room
+    for (let i = 0; i < pizza.images.length; i++) {
+        await cloudinary.v2.uploader.destroy(pizza.images[i].public_id)
+    }
+
+    await pizza.remove();
+
+    res.status(200).json({
+        success: true,
+        message: 'Pizza is deleted.'
+    })
+
+})
+
 export {
     newPizza,
-    allAdminPizza
+    allAdminPizza,
+    updatePizza,
+    deletePizza
 }
