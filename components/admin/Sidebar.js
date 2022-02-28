@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux';
 import styles from '../../styles/Sidebar.module.css';
 
 const Sidebar = () => {
-    const { user, loading } = useSelector(state => state.loadedUser);
+    // const { user, loading } = useSelector(state => state.loadedUser);
     return (
         <div className={styles.sidebar}>
             <div className="container">
-                {
+                {/* {
                     loading ? (
                         <>
                             <Spinner />
@@ -27,15 +27,15 @@ const Sidebar = () => {
                     )
                 }
 
-                <hr />
+                <hr /> */}
                 <div className={styles.link_items}>
                     <Link href="/admin" passHref>
                         <a><MdFavoriteBorder className='me-3' size={25} /> Dashboard</a>
                     </Link>
-                    <Link href="/admin/allPizza" passHref>
+                    <Link href="/admin/pizzas/" passHref>
                         <a><MdFavoriteBorder className='me-3' size={25} /> All Pizza</a>
                     </Link>
-                    <Link href="/admin/addpizza" passHref>
+                    <Link href="/admin//pizzas/addpizza" passHref>
                         <a><MdFavoriteBorder className='me-3' size={25} /> Add Pizza</a>
                     </Link>
                 </div>

@@ -48,6 +48,21 @@ const allAdminPizza = catchAsyncErrors(async (req, res) => {
 
 })
 
+// Get pizza details   =>   /api/pizza/:id
+const getSinglePizza = catchAsyncErrors(async (req, res, next) => {
+
+    const pizza = await Pizza.findById(req.query.id);
+
+    if (!pizza) {
+        return next(new ErrorHandler('Pizza not found with this ID', 404))
+    }
+
+    res.status(200).json({
+        success: true,
+        pizza
+    })
+})
+
 // Update pizza details   =>   /api/pizza/:id
 const updatePizza = catchAsyncErrors(async (req, res, next) => {
 
@@ -84,7 +99,7 @@ const updatePizza = catchAsyncErrors(async (req, res, next) => {
 
     }
 
-    room = await Pizza.findByIdAndUpdate(req.query.id, req.body, {
+    pizza = await Pizza.findByIdAndUpdate(req.query.id, req.body, {
         new: true,
         runValidators: true,
         useFindAndModify: false
@@ -123,6 +138,7 @@ const deletePizza = catchAsyncErrors(async (req, res, next) => {
 export {
     newPizza,
     allAdminPizza,
+    getSinglePizza,
     updatePizza,
     deletePizza
 }

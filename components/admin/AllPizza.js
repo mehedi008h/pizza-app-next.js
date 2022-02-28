@@ -67,7 +67,7 @@ const AllPizza = () => {
                 name: pizza.title,
                 actions:
                     <>
-                        <Link href={`/admin/pizza/${pizza._id}`}>
+                        <Link href={`/admin/pizzas/${pizza._id}`}>
                             <a className="btn btn-primary">
                                 Edit
                             </a>

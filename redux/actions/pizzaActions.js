@@ -8,13 +8,13 @@ import {
     ADMIN_PIZZA_REQUEST,
     ADMIN_PIZZA_SUCCESS,
     ADMIN_PIZZA_FAIL,
+    PIZZA_DETAILS_SUCCESS,
+    PIZZA_DETAILS_FAIL,
     UPDATE_PIZZA_REQUEST,
     UPDATE_PIZZA_SUCCESS,
-    UPDATE_PIZZA_RESET,
     UPDATE_PIZZA_FAIL,
     DELETE_PIZZA_REQUEST,
     DELETE_PIZZA_SUCCESS,
-    DELETE_PIZZA_RESET,
     DELETE_PIZZA_FAIL,
 
     CLEAR_ERRORS
@@ -43,6 +43,35 @@ export const newPizza = (pizzaData) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: NEW_PIZZA_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+// Get room details
+export const getPizzaDetails = (req, id) => async (dispatch) => {
+    try {
+
+        const { origin } = absoluteUrl(req);
+
+        let url;
+
+        if (req) {
+            url = `${origin}/api/pizza/${id}`
+        } else {
+            url = `/api/pizza/${id}`
+        }
+
+        const { data } = await axios.get(url)
+
+        dispatch({
+            type: PIZZA_DETAILS_SUCCESS,
+            payload: data.pizza
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PIZZA_DETAILS_FAIL,
             payload: error.response.data.message
         })
     }

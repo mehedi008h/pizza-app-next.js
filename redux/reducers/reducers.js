@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { adminPizzaReducer, newPizzaReducer, pizzaReducer } from './pizzaReducers';
+import { adminPizzaReducer, newPizzaReducer, pizzaDetailsReducer, pizzaReducer } from './pizzaReducers';
 import { authReducer, loadedUserReducer, userReducer } from './userReducers';
 
 const reducer = combineReducers({
@@ -9,6 +9,7 @@ const reducer = combineReducers({
 
     newPizza: newPizzaReducer,
     adminPizza: adminPizzaReducer,
+    pizzaDetails: pizzaDetailsReducer,
     pizza: pizzaReducer,
 })
 

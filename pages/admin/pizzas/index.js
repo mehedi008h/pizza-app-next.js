@@ -1,17 +1,15 @@
 import React from 'react';
-import User from '../../models/user';
+import User from '../../../models/user';
 import { getSession } from 'next-auth/react';
 
-import { getAdminPizza } from '../../redux/actions/pizzaActions';
-import { wrapper } from '../../redux/store';
-import Sidebar from '../../components/admin/Sidebar';
-import Drawer from '../../components/layout/Drawer';
-import Layout from '../../components/layout/Layout';
-import AllPizza from '../../components/admin/AllPizza';
+import Sidebar from '../../../components/admin/Sidebar';
+import Drawer from '../../../components/layout/Drawer';
+import Layout from '../../../components/layout/Layout';
+import AllPizza from '../../../components/admin/AllPizza';
 
 const allPizza = () => {
     return (
-        <Layout title='Admin - Pizza App'>
+        <Layout title='All Pizza - Pizza App'>
             <div className="row g-3">
                 <div className="col-md-2">
                     <Sidebar />

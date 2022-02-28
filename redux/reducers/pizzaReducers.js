@@ -6,6 +6,8 @@ import {
     ADMIN_PIZZA_REQUEST,
     ADMIN_PIZZA_SUCCESS,
     ADMIN_PIZZA_FAIL,
+    PIZZA_DETAILS_SUCCESS,
+    PIZZA_DETAILS_FAIL,
     UPDATE_PIZZA_REQUEST,
     UPDATE_PIZZA_SUCCESS,
     UPDATE_PIZZA_RESET,
@@ -72,6 +74,30 @@ export const adminPizzaReducer = (state = { pizzas: [] }, action) => {
         case ADMIN_PIZZA_FAIL:
             return {
                 loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+// Pizza details reducer
+export const pizzaDetailsReducer = (state = { pizza: {} }, action) => {
+    switch (action.type) {
+        case PIZZA_DETAILS_SUCCESS:
+            return {
+                pizza: action.payload
+            }
+
+        case PIZZA_DETAILS_FAIL:
+            return {
                 error: action.payload
             }
 
