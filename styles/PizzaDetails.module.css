@@ -1,0 +1,43 @@
+.pizza_details {
+    background-color: aliceblue;
+    display: flex;
+    min-height: 90vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--font-base);
+}
+.pizza_size {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+    padding: 1rem;
+    transition: all 0.5s ease-in-out;
+
+}
+.pizza_size:hover {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    
+}
+
+.button button{
+    padding: 5px 15px;
+    color: white;
+    font-weight: 500;
+    border: none;
+    margin-left: 5px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.button button:nth-child(1) {
+    background-color: brown;
+}
+.button button:nth-child(2) {
+    background-color: cornflowerblue;
+}

@@ -31,7 +31,7 @@ const Pizza = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="container mt-3">
+                        <div className="container mt-3 mb-3">
                             <div className="row g-5">
                                 {
                                     pizzas.map(pizza => (
