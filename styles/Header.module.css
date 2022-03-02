@@ -47,6 +47,42 @@
     color: #545454;
 }
 
+.item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: white;
+  }
+  
+  .item:nth-child(2) {
+    flex: 3;
+  }
+  
+  .item:last-child {
+    justify-content: flex-end;
+  }
+  .cart{
+    position: relative;
+    cursor: pointer;
+}
+
+.counter{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-golden);
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
 .app__navbar_login {
     display: flex;
     justify-content: flex-end;

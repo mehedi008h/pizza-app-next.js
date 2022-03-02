@@ -1,17 +1,19 @@
-import { ADD_TO_CART, REMOVE_ITEM_CART, SAVE_SHIPPING_INFO } from '../constants/cartConstants';
+import { GET_TO_CART, ADD_TO_CART, REMOVE_ITEM_CART, SAVE_SHIPPING_INFO } from '../constants/cartConstants';
 
 export const cartReducer = (state = { cartItems: [], shippingInfo: {} }, action) => {
     switch (action.type) {
-
+        case GET_TO_CART:
+            return {
+                cartItems: action.payload
+            }
         case ADD_TO_CART:
             const item = action.payload;
-
-            const isItemExist = state.cartItems.find(i => i.pizza === item.pizza)
+            const isItemExist = state.cartItems.find(i => i.id === item.id)
 
             if (isItemExist) {
                 return {
                     ...state,
-                    cartItems: state.cartItems.map(i => i.pizza === isItemExist.pizza ? item : i)
+                    cartItems: state.cartItems.map(i => i.id === isItemExist.id ? item : i)
                 }
             } else {
                 return {
@@ -23,7 +25,7 @@ export const cartReducer = (state = { cartItems: [], shippingInfo: {} }, action)
         case REMOVE_ITEM_CART:
             return {
                 ...state,
-                cartItems: state.cartItems.filter(i => i.pizza !== action.payload)
+                cartItems: state.cartItems.filter(i => i.id !== action.payload)
             }
 
 

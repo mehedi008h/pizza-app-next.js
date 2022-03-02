@@ -12,6 +12,7 @@ const bindMiddlware = (middlware) => {
     return applyMiddleware(...middlware)
 }
 
+
 const reducer = (state, action) => {
     if (action.type === HYDRATE) {
         const nextState = {

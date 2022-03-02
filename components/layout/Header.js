@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { BiEdit, BiLogOutCircle, BiUserCircle } from 'react-icons/bi';
-import { MdFavoriteBorder, MdOutlineArrowDropDownCircle, MdOutlineRestaurantMenu } from 'react-icons/md';
+import { BiLogOutCircle, BiUserCircle } from 'react-icons/bi';
+import { MdFavoriteBorder, MdOutlineArrowDropDownCircle, MdOutlineRestaurantMenu, MdShoppingCart } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { getItemToCart } from '../../redux/actions/cartActions';
 
 import styles from '../../styles/Header.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,12 +20,17 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const { user, loading } = useSelector(state => state.loadedUser);
+    const { cartItems } = useSelector(state => state.cart);
 
     useEffect(() => {
         if (!user) {
             dispatch(loadUser())
         }
-    }, [dispatch, user])
+
+        if (cartItems) {
+            dispatch(getItemToCart())
+        }
+    }, [dispatch, user, cartItems])
 
 
     const logoutHandler = () => {
@@ -39,6 +46,14 @@ const Header = () => {
                     <Link href="/" passHref><a className={styles.p__opensans}>Home</a></Link>
                     <Link href="/pizza" passHref><a className={styles.p__opensans}>Pizza</a></Link>
                     <div className={styles.divied} />
+                    <Link href="/cart" passHref>
+                        <div className={styles.item}>
+                            <div className={styles.cart}>
+                                <MdShoppingCart size={25} />
+                                <div className={styles.counter}>{cartItems.length}</div>
+                            </div>
+                        </div>
+                    </Link>
                     {loading ?
                         (
                             <Spinner as="span" animation="border" variant="info" role="status" aria-hidden="true" />

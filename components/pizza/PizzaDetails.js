@@ -21,7 +21,6 @@ const PizzaDetails = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { id } = router.query;
-    console.log("Price", pizza);
 
     const changePrice = (number) => {
         setPrice(price + number);
