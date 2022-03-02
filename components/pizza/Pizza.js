@@ -21,7 +21,7 @@ const Pizza = () => {
             toast.error(error);
             dispatch(clearErrors())
         }
-    }, [error, toast])
+    }, [dispatch, error])
     return (
         <div className={styles.pizza}>
             {

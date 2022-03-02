@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 
 import { FaPizzaSlice } from 'react-icons/fa';
 import styles from '../../styles/PizzaDetails.module.css';
+import { toast } from 'react-toastify';
+import { addItemToCart } from '../../redux/actions/cartActions';
 
 const PizzaDetails = () => {
     const { pizza, error } = useSelector(state => state.pizzaDetails);
@@ -18,6 +20,7 @@ const PizzaDetails = () => {
 
     const dispatch = useDispatch();
     const router = useRouter();
+    const { id } = router.query;
     console.log("Price", pizza);
 
     const changePrice = (number) => {
@@ -41,6 +44,34 @@ const PizzaDetails = () => {
             setExtras(extras.filter((extra) => extra._id !== option._id));
         }
     };
+
+    const increaseQty = () => {
+        const count = document.querySelector('.count')
+        if (count.valueAsNumber >= 5) return;
+        const qty = count.valueAsNumber + 1;
+        setQuantity(qty);
+    }
+
+    const decreaseQty = () => {
+        const count = document.querySelector('.count')
+        if (count.valueAsNumber <= 1) return;
+        const qty = count.valueAsNumber - 1;
+        setQuantity(qty);
+    }
+
+    const pizzaData = {
+        price,
+        quantity,
+        extras,
+        image: pizza.images[0].url,
+        title: pizza.title,
+        id: pizza._id
+    };
+
+    const addToCart = () => {
+        dispatch(addItemToCart(pizzaData));
+        toast.success('Item Added to Cart');
+    }
 
     return (
         <div className={styles.pizza_details}>
@@ -98,13 +129,22 @@ const PizzaDetails = () => {
 
                                             onChange={(e) => handleChange(e, option)}
                                         />
-                                        <label className='ms-3' htmlFor="double">{option.text}</label>
+                                        <label className='ms-3' htmlFor="double">{option.text} <span> - ${option.price}</span></label>
                                     </div>
                                 ))}
                             </div>
+
+                            <div className={styles.quantity}>
+                                <span className="minus " onClick={decreaseQty}>-</span>
+
+                                <input type="number" className="count" value={quantity} readOnly />
+
+                                <span className="plus" onClick={increaseQty}>+</span>
+                            </div>
+
                             <div className={styles.button}>
                                 <button>Buy Now</button>
-                                <button>Add to Cart</button>
+                                <button onClick={addToCart} >Add to Cart</button>
                             </div>
                         </div>
                     </div>

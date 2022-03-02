@@ -24,6 +24,9 @@
     border-radius: 10px;
     
 }
+.button {
+    margin-top: 40px;
+}
 
 .button button{
     padding: 5px 15px;
@@ -32,12 +35,39 @@
     border: none;
     margin-left: 5px;
     border-radius: 20px;
-    margin-top: 20px;
 }
 
 .button button:nth-child(1) {
     background-color: brown;
 }
 .button button:nth-child(2) {
-    background-color: cornflowerblue;
+    background-color: black;
+}
+
+.quantity {
+    display: flex;
+    margin-top: 20px;
+}
+.quantity span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    color: white;
+}
+.quantity input {
+    width: 10%;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px;
+}
+.quantity span:nth-child(1) {
+    background-color: red;
+}
+.quantity span:nth-child(3) {
+    background-color: green;
 }

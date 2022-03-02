@@ -8,7 +8,7 @@ import styles from '../../styles/Pizza.module.css';
 
 const PizzaCard = ({ pizza }) => {
     return (
-        <Link href={`/pizza/${pizza._id}`}>
+        <Link href={`/pizza/${pizza._id}`} passHref>
             <div className={styles.pizza_card}>
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className={styles.card_rating}><AiFillStar style={{ color: 'gold' }} size={20} /> <span className='text-white ms-1'>4.5</span></div>
