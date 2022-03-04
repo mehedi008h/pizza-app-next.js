@@ -64,8 +64,6 @@ const AddPizza = () => {
             images
         }
 
-        console.log("Data", pizzaData);
-
         if (images.length === 0) return toast.error('Please upload images.')
 
         dispatch(newPizza(pizzaData))

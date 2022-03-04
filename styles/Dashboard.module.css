@@ -1,0 +1,12 @@
+.dashboard {
+    background-color: white;
+    display: flex;
+    font-family: var(--font-alt);
+}
+.total_items {
+    background-color: #ABCDAB;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}

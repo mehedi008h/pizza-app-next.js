@@ -6,13 +6,16 @@ import { addItemToCart, getItemToCart, removeItemFromCart } from '../redux/actio
 import { loadUser } from '../redux/actions/userActions';
 import styles from '../styles/Cart.module.css';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { useRouter } from 'next/router';
 
 const Cart = () => {
-    const [quantity, setQuantity] = useState(1);
-    const dispatch = useDispatch();
-
     const { user, loading } = useSelector(state => state.loadedUser);
     const { cartItems } = useSelector(state => state.cart);
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+
 
     const removeCartItemHandler = (id) => {
         dispatch(removeItemFromCart(id))
@@ -43,11 +46,15 @@ const Cart = () => {
             dispatch(loadUser())
         }
 
-        if (cartItems) {
-            dispatch(getItemToCart())
-        }
+        // if (cartItems) {
+        //     dispatch(getItemToCart())
+        // }
 
-    }, [dispatch, user, cartItems]);
+    }, [dispatch, user]);
+
+    const handleShipping = () => {
+        router.push('/shipping');
+    }
 
     return (
         <div>
@@ -111,7 +118,8 @@ const Cart = () => {
                                     <p>Est. total: <span className="order-summary-values">${cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}</span></p>
 
                                     <hr />
-                                    <button>Check out</button>
+
+                                    <button onClick={handleShipping}>Check out</button>
                                 </div>
                             </div>
                         </div>

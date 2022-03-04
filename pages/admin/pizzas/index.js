@@ -50,6 +50,7 @@ const allPizza = () => {
 export async function getServerSideProps(context) {
 
     const session = await getSession({ req: context.req })
+    console.log("Session", session);
 
     let user = await User.findById(session.id);
     if (!session || user.role !== 'admin') {

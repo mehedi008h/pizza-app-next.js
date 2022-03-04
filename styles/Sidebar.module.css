@@ -1,21 +1,25 @@
 .sidebar {
     min-height: 90vh;
-    background-color: antiquewhite;
-
+    width: 100%;
+    background-image: linear-gradient(to left bottom, #faf9fa, #ebe9ed, #dbd9e2, #c9cad6, #b6bccb);
     display: flex;
+    font-family: var(--font-alt);
 }
 .link_items {
     display: flex;
     flex-direction: column;
+    transition: all 0.8s ease-in-out;
 }
 
-.link_items a {
+.link_item{
     text-decoration: none;
-    color: white;
+    color: #3F3939;
     margin-top: 10px;
-    padding: 10px 25px;
-    background-image: linear-gradient(to right top, #d4386d, #d5326a, #d72a66, #d82163, #d9165f);
-    border-radius: 5px;
+    padding: 5px 25px;
     font-weight: 700;
 
+}
+.link_item:hover {
+    border-left: 5px solid #EA4C89;
+    color: #EA4C89;
 }

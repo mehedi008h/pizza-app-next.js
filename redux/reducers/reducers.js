@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { cartReducer } from './cartReducers';
+import { newOrderReducer } from './orderReducers';
 import { adminPizzaReducer, allPizzaReducer, newPizzaReducer, pizzaDetailsReducer, pizzaReducer } from './pizzaReducers';
 import { authReducer, loadedUserReducer, userReducer } from './userReducers';
 
@@ -8,13 +9,12 @@ const reducer = combineReducers({
     loadedUser: loadedUserReducer,
     user: userReducer,
     allPizza: allPizzaReducer,
-
     newPizza: newPizzaReducer,
     adminPizza: adminPizzaReducer,
     pizzaDetails: pizzaDetailsReducer,
     pizza: pizzaReducer,
-
-    cart: cartReducer
+    cart: cartReducer,
+    newOrder: newOrderReducer,
 })
 
 export default reducer;

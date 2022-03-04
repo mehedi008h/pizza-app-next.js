@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import React from 'react';
 import Drawer from '../../../components/layout/Drawer';
 import Layout from '../../../components/layout/Layout';
@@ -23,5 +24,24 @@ const editProfile = () => {
         </Layout>
     );
 };
+
+export async function getServerSideProps(context) {
+
+    const session = await getSession({ req: context.req })
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: { session }
+    }
+
+}
 
 export default editProfile;
