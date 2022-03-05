@@ -47,10 +47,10 @@ const Sidebar = () => {
                     <Link href="/admin/pizzas/addpizza" passHref>
                         <a className={styles.link_item}><MdOutlineLeakAdd className='me-4' size={20} /> Add Pizza</a>
                     </Link>
-                    <Link href="/admin//pizzas/addpizza" passHref>
+                    <Link href="/admin/orders" passHref>
                         <a className={styles.link_item}><BsBorderStyle className='me-4' size={20} /> All Order</a>
                     </Link>
-                    <Link href="/admin//pizzas/addpizza" passHref>
+                    <Link href="/admin/pizzas/addpizza" passHref>
                         <a className={styles.link_item}><RiUserHeartLine className='me-4' size={20} /> All User</a>
                     </Link>
                 </div>

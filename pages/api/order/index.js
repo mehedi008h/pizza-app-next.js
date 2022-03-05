@@ -4,7 +4,7 @@ import { newOrder } from '../../../controller/orderController';
 
 
 import { isAuthenticatedUser } from '../../../middleware/auth';
-import onError from '../../../middleware/auth';
+import onError from '../../../middleware/errors';
 
 const handler = nc({ onError });
 

@@ -30,7 +30,7 @@ const Header = () => {
         if (cartItems) {
             dispatch(getItemToCart())
         }
-    }, [dispatch])
+    }, [dispatch, user, cartItems])
 
 
     const logoutHandler = () => {
