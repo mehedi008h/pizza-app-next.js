@@ -26,11 +26,7 @@ const Header = () => {
         if (!user) {
             dispatch(loadUser())
         }
-
-        if (cartItems) {
-            dispatch(getItemToCart())
-        }
-    }, [dispatch, user, cartItems])
+    }, [dispatch,user])
 
 
     const logoutHandler = () => {

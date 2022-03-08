@@ -24,29 +24,6 @@ const allPizza = () => {
     );
 };
 
-// check admin 
-
-// export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
-//     const session = await getSession({ req })
-
-//     let user = await User.findById(session.id);
-//     if (!session || user.role !== 'admin') {
-//         return {
-//             redirect: {
-//                 destination: '/login',
-//                 permanent: false
-//             }
-//         }
-//     }
-
-//     return {
-//         props: {}
-//     }
-
-//     await store.dispatch(getAdminPizza(req.headers.cookie, req))
-
-// })
-
 export async function getServerSideProps(context) {
 
     const session = await getSession({ req: context.req })

@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, getItemToCart, removeItemFromCart } from '../redux/actions/cartActions';
 import { loadUser } from '../redux/actions/userActions';
 import styles from '../styles/Cart.module.css';
-import { AiOutlineDelete } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 
 const Cart = () => {
@@ -15,7 +14,11 @@ const Cart = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-
+    useEffect(() => {
+        if (cartItems) {
+            dispatch(getItemToCart())
+        }
+    }, [dispatch, cartItems])
 
     const removeCartItemHandler = (id) => {
         dispatch(removeItemFromCart(id))
@@ -80,11 +83,10 @@ const Cart = () => {
                                                         <a className={styles.item_link}>{item?.title}</a>
                                                     </Link>
                                                 </div>
-
-
                                                 <div className="col-4 col-lg-1 mt-4 mt-lg-0">
                                                     <p className={styles.item_price}>${item?.price}</p>
                                                 </div>
+                                              
 
                                                 <div className="col-4 col-lg-3 mt-4 mt-lg-0">
                                                     <div className={styles.quantity}>
